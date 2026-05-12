@@ -46,7 +46,7 @@ export function HeroSection() {
       <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-center px-8 py-6 pointer-events-none">
         <div className="pointer-events-auto transition-transform hover:scale-105 duration-500">
           <img 
-            src="/petrologo.PNG" 
+            src="./petrologo.PNG" 
             alt="PetroGame" 
             className="h-24 w-auto object-contain -mt-4 opacity-90 drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]" 
           />

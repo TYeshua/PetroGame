@@ -16,14 +16,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 // --- DADOS ---
 const speakers = [
-  { name: 'Shelda Corrêa', title: 'Presidente', icon: Users, image: '/team/shelda.jpeg', linkedin: 'https://www.linkedin.com/in/shelda-corr%C3%AAa-988a10159/' },
-  { name: 'Davi Maia', title: 'Vice-presidente', icon: Users, image: '/team/davi.jpeg', linkedin: 'https://www.linkedin.com/in/davi-maia-557a7634b?utm_source=share_via&utm_content=profile&utm_medium=member_android#' },
-  { name: 'Evelyn Campelo', title: 'Conselheira', icon: Users, image: '/team/Eveli.jpg', linkedin: 'https://www.linkedin.com/in/evelyncampelo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
-  { name: 'Thiago Yeshua', title: 'Diretor de Tecnologia - Webmaster', icon: FaCode, image: '/team/yeshuanovo.jpeg', linkedin: 'www.linkedin.com/in/thiagoyeshua' },
-  { name: 'Ana Brito', title: 'Diretora de Marketing', icon: SiCoinmarketcap, image: '/team/ana2.DNG', linkedin: 'https://www.linkedin.com/in/ana-clara-nascimento-7a4034255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
-  { name: 'Gabriel Braga', title: 'Diretor de Comunicação e Eventos', icon: FaComment, image: '/team/braga.jpeg', linkedin: 'https://www.linkedin.com/in/gabriel-braga-975990235' },
-  { name: 'Ana Anjo', title: 'Tesoureira', icon: FaMoneyBillAlt, image: '/team/anaanjo.jpeg', linkedin: 'https://www.linkedin.com/in/ana-clara-anjo-b59738256' },
-  { name: 'Andressa Menezes', title: 'Secretária', icon: FaPaste, image: '/team/andressa.jpeg', linkedin: 'https://www.linkedin.com/in/andressa-menezes-a1b358303?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'},
+  { name: 'Shelda Corrêa', title: 'Presidente', icon: Users, image: './team/shelda.jpeg', linkedin: 'https://www.linkedin.com/in/shelda-corr%C3%AAa-988a10159/' },
+  { name: 'Davi Maia', title: 'Vice-presidente', icon: Users, image: './team/davi.jpeg', linkedin: 'https://www.linkedin.com/in/davi-maia-557a7634b?utm_source=share_via&utm_content=profile&utm_medium=member_android#' },
+  { name: 'Evelyn Campelo', title: 'Conselheira', icon: Users, image: './team/Eveli.jpg', linkedin: 'https://www.linkedin.com/in/evelyncampelo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+  { name: 'Thiago Yeshua', title: 'Diretor de Tecnologia - Webmaster', icon: FaCode, image: './team/yeshuanovo.jpeg', linkedin: 'www.linkedin.com/in/thiagoyeshua' },
+  { name: 'Ana Brito', title: 'Diretora de Marketing', icon: SiCoinmarketcap, image: './team/ana2.DNG', linkedin: 'https://www.linkedin.com/in/ana-clara-nascimento-7a4034255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' },
+  { name: 'Gabriel Braga', title: 'Diretor de Comunicação e Eventos', icon: FaComment, image: './team/braga.jpeg', linkedin: 'https://www.linkedin.com/in/gabriel-braga-975990235' },
+  { name: 'Ana Anjo', title: 'Tesoureira', icon: FaMoneyBillAlt, image: './team/anaanjo.jpeg', linkedin: 'https://www.linkedin.com/in/ana-clara-anjo-b59738256' },
+  { name: 'Andressa Menezes', title: 'Secretária', icon: FaPaste, image: './team/andressa.jpeg', linkedin: 'https://www.linkedin.com/in/andressa-menezes-a1b358303?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'},
 ];
 
 const schedule = [

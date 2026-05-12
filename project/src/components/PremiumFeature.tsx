@@ -10,7 +10,7 @@ import * as THREE from 'three';
 gsap.registerPlugin(ScrollTrigger);
 
 const TrophyModel = () => {
-  const { scene } = useGLTF('/trofeunome1.glb');
+  const { scene } = useGLTF('./trofeunome1.glb');
   const trophyRef = useRef<THREE.Group>(null);
   
   useFrame((state, delta) => {
@@ -29,7 +29,7 @@ const TrophyModel = () => {
   );
 };
 
-useGLTF.preload('/trofeunome1.glb');
+useGLTF.preload('./trofeunome1.glb');
 
 // --- COMPONENTES AUXILIARES ---
 const SpotLightCard = ({ children, className = "" }: any) => {
