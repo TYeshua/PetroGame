@@ -4,6 +4,7 @@ import path from "path";
 import cesium from 'vite-plugin-cesium'; // 1. Importe o plugin
 
 export default defineConfig({
+  base: '/PetroGame/',
   plugins: [
     react(),
     cesium() // 2. Adicione à lista de plugins
