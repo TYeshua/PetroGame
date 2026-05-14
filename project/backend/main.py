@@ -29,11 +29,14 @@ MP_ACCESS_TOKEN: str  = os.getenv("MERCADO_PAGO_ACCESS_TOKEN", "")
 WEBHOOK_SECRET_TOKEN: str = os.getenv("WEBHOOK_SECRET_TOKEN", "")
 GOOGLE_SHEET_NAME: str    = os.getenv("GOOGLE_SHEET_NAME", "Inscricoes_PetroGame")
 
-# E-mail SMTP
+# E-mail SMTP (Opcional - bloqueado no Render Free)
 EMAIL_REMETENTE: str = os.getenv("EMAIL_REMETENTE", "")
 EMAIL_SENHA: str     = os.getenv("EMAIL_SENHA", "")
 SMTP_SERVER: str     = os.getenv("SMTP_SERVER", "smtp.gmail.com")
 SMTP_PORT: int       = int(os.getenv("SMTP_PORT", "587"))
+
+# Google App Script (Alternativa para envio HTTP, contorna bloqueio do Render)
+APP_SCRIPT_URL: str  = os.getenv("APP_SCRIPT_URL", "")
 
 # Google Forms para equipes
 FORMS_EQUIPE_URL: str = os.getenv("FORMS_EQUIPE_URL", "https://forms.gle/AfWHiYvEw8FhacdH9")
@@ -201,8 +204,8 @@ def _construir_html(nome: str, plano: str) -> str:
 
 async def enviar_email_confirmacao(email_destino: str, nome: str, plano: str) -> None:
     print(f"[EMAIL] Iniciando envio para {email_destino!r} | Plano: {plano!r}")
-    if not EMAIL_REMETENTE or not EMAIL_SENHA:
-        print("[EMAIL] ❌ Credenciais SMTP não configuradas.")
+    if not EMAIL_REMETENTE and not APP_SCRIPT_URL:
+        print("[EMAIL] ❌ Credenciais SMTP ou APP_SCRIPT_URL não configuradas.")
         return
 
     assunto = (
@@ -221,16 +224,32 @@ async def enviar_email_confirmacao(email_destino: str, nome: str, plano: str) ->
         texto_puro += f"\nPreencha o formulário de membros: {FORMS_EQUIPE_URL}\n"
 
     msg.attach(MIMEText(texto_puro, "plain", "utf-8"))
-    msg.attach(MIMEText(_construir_html(nome, plano), "html", "utf-8"))
+    html_body = _construir_html(nome, plano)
+    msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     def _enviar_sync():
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as servidor:
-            servidor.ehlo()
-            servidor.starttls()
-            servidor.ehlo()
-            servidor.login(EMAIL_REMETENTE, EMAIL_SENHA)
-            servidor.sendmail(EMAIL_REMETENTE, email_destino, msg.as_string())
-            print(f"[EMAIL] ✅ Enviado para {email_destino}")
+        if APP_SCRIPT_URL:
+            import urllib.request
+            import urllib.parse
+            import json
+            
+            payload = json.dumps({
+                "to": email_destino,
+                "subject": assunto,
+                "htmlBody": html_body
+            }).encode('utf-8')
+            
+            req = urllib.request.Request(APP_SCRIPT_URL, data=payload, headers={'Content-Type': 'application/json'})
+            with urllib.request.urlopen(req) as response:
+                print(f"[EMAIL] ✅ Enviado via App Script para {email_destino}. Status: {response.status}")
+        else:
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as servidor:
+                servidor.ehlo()
+                servidor.starttls()
+                servidor.ehlo()
+                servidor.login(EMAIL_REMETENTE, EMAIL_SENHA)
+                servidor.sendmail(EMAIL_REMETENTE, email_destino, msg.as_string())
+                print(f"[EMAIL] ✅ Enviado via SMTP para {email_destino}")
 
     await asyncio.to_thread(_enviar_sync)
 
