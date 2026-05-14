@@ -80,7 +80,7 @@ const tiers: TierType[] = [
     description: 'Inscrição completa para o time', 
     highlighted: true, 
     icon: Crown, 
-    features: ['Participação no PetroGame', 'Vaga garantida para a equipe', 'Certificados individuais'] 
+    features: ['Participação no PetroGame', 'Vaga garantida para a equipe', 'Certificados individuais', 'Máximo de 4 competidores por equipe'] 
   },
 ];
 

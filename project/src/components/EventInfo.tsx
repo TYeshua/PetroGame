@@ -152,7 +152,7 @@ export const EventInfo: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-3">3. Inscrições</h3>
                   <p className="text-[#D4D4D8] leading-relaxed">
-                    Exclusivamente online via formulário. Taxa de <strong>R$ 60,00 por equipe</strong> (quatro participantes). O pagamento no ato da inscrição é obrigatório. O prazo encerra <strong>15 dias antes</strong> do evento para organização e orientações aos capitães.
+                    Exclusivamente online via formulário. Taxa de <strong>R$ 60,00 por equipe</strong> (quatro participantes). O pagamento no ato da inscrição é obrigatório. As inscrições estarão abertas até o dia <strong>31 de maio</strong>.
                   </p>
                 </div>
               </div>
