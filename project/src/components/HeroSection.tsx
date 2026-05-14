@@ -4,7 +4,7 @@ import { GridScan } from './GridScan';
 import GlitchText from './GlitchText';
 import { GiOilDrum } from "react-icons/gi";
 
-const words = ["Preparado?", "SPE UFPA Apresenta", "PetroGame", "A Convergência"];
+const words = ["Preparado?", "SPE UFPA Apresenta", "PetroGames", "A Convergência"];
 
 export function HeroSection() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -47,7 +47,7 @@ export function HeroSection() {
         <div className="pointer-events-auto transition-transform hover:scale-105 duration-500">
           <img 
             src="./petrologo.PNG" 
-            alt="PetroGame" 
+            alt="PetroGames" 
             className="h-24 w-auto object-contain -mt-4 opacity-90 drop-shadow-[0_0_15px_rgba(239,68,68,0.2)]" 
           />
         </div>
@@ -76,7 +76,7 @@ export function HeroSection() {
                 enableShadows={true}
                 enableOnHover={true}
                 className={`font-bold tracking-tight text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-none ${
-                  words[currentWordIndex] === "PetroGame" 
+                  words[currentWordIndex] === "PetroGames" 
                   ? "text-red-600 drop-shadow-[0_0_40px_rgba(239,68,68,0.3)] uppercase font-black" 
                   : "text-white"
                 }`}

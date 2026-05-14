@@ -22,7 +22,7 @@ export function Footer() {
                 <Flame className="h-5 w-5 text-white" />
               </div>
               <span className="font-display text-xl font-black uppercase tracking-wider text-white">
-                PETROGAME
+                PETROGAMES
               </span>
             </div>
 
@@ -85,7 +85,7 @@ export function Footer() {
           className="mt-8 border-t border-white/10 pt-6 flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-0 font-body text-xs text-zinc-600"
         >
           <p>
-            © {currentYear} PetroGame. Todos os direitos reservados.
+            © {currentYear} PetroGames. Todos os direitos reservados.
           </p>
           
           <div className="flex items-center gap-4">

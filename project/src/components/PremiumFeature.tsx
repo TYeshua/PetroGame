@@ -118,10 +118,10 @@ export const PremiumFeature: React.FC = () => {
             <div className="space-y-4 fade-up-feature">
               <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight">
                 Sobre o <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">PetroGame</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">PetroGames</span>
               </h2>
               <p className="text-[#D4D4D8] text-lg md:text-xl max-w-xl leading-relaxed tracking-[-0.01em]">
-                A indústria de energia e o universo dos games se fundem. O PetroGame não é apenas um congresso — é uma explosão de ideias que redefine o futuro em um único palco.
+                A indústria de energia e o universo dos games se fundem. O PetroGames não é apenas um congresso — é uma explosão de ideias que redefine o futuro em um único palco.
               </p>
             </div>
 
