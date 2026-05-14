@@ -9,9 +9,18 @@ import { HorizontalScrollGallery } from './components/HorizontalScrollGallery';
 import { FloatingElement } from './components/FloatingElement';
 import { FloatingNav } from './components/FloatingNav';
 import { Droplet, Settings, Flame, Zap, Hexagon } from 'lucide-react';
+import { useEffect } from 'react';
 import TargetCursor from './components/TargetCursor';
 
 function App() {
+  // Wake up backend no carregamento inicial da página
+  useEffect(() => {
+    const envApiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+    const API_URL = envApiUrl.endsWith('/') ? envApiUrl.slice(0, -1) : envApiUrl;
+    // Faz um fetch silencioso apenas para "acordar" o Render
+    fetch(`${API_URL}/`).catch(() => {});
+  }, []);
+
   return (
     <SmoothScrollProvider>
       <main className="relative min-h-screen bg-black text-white hover:cursor-default" style={{ overflow: "hidden" }}>
