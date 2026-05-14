@@ -23,7 +23,8 @@ interface FormData {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+const envApiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
+const API_URL = envApiUrl.endsWith('/') ? envApiUrl.slice(0, -1) : envApiUrl;
 const POLL_INTERVAL_MS = 5_000;
 
 /** Formata CPF enquanto o usuário digita: 000.000.000-00 */
@@ -140,6 +141,7 @@ export default function CheckoutPix({ titulo, valorCentavos, valorFormatado, onC
       if (data.id_transacao) startPolling(data.id_transacao);
 
     } catch (err: unknown) {
+      console.error("[CheckoutPix] Erro:", err);
       setErrorMsg(err instanceof Error ? err.message : 'Erro ao conectar com o servidor.');
       setStep('ERROR');
     }

@@ -244,15 +244,13 @@ app = FastAPI(
     version="3.0.0",
 )
 
+# Permite origins do Vercel via variável de ambiente, ou libera geral para facilitar.
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-    ],
-    allow_credentials=True,
+    allow_origins=ALLOWED_ORIGINS.split(",") if ALLOWED_ORIGINS != "*" else ["*"],
+    allow_credentials=True if ALLOWED_ORIGINS != "*" else False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
