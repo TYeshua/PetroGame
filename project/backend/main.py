@@ -11,6 +11,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 import os
 import json
+import hmac
+import hashlib
 import smtplib
 import asyncio
 import traceback
@@ -438,11 +440,47 @@ async def webhook_mercadopago(request: Request):
     """
     O Mercado Pago envia notificações do tipo 'payment'.
     Fluxo:
+    0. Valida assinatura HMAC-SHA256 via header x-signature.
     1. Lê o ID do pagamento da notificação.
     2. Consulta o status via SDK.
     3. Se 'approved', atualiza a planilha para PAGO e envia e-mail.
     """
-    body = await request.json()
+    # ── 0. Validação da assinatura do Mercado Pago ──────────────────────────
+    if WEBHOOK_SECRET_TOKEN:
+        x_signature   = request.headers.get("x-signature", "")
+        x_request_id  = request.headers.get("x-request-id", "")
+        raw_body      = await request.body()
+
+        # Extrai ts e v1 do header x-signature (formato: "ts=...;v1=...")
+        ts_value = v1_value = ""
+        for parte in x_signature.split(";"):
+            parte = parte.strip()
+            if parte.startswith("ts="):
+                ts_value = parte[3:]
+            elif parte.startswith("v1="):
+                v1_value = parte[3:]
+
+        # Monta o manifesto conforme documentação do MP
+        data_obj_pre = json.loads(raw_body) if raw_body else {}
+        data_id = str(data_obj_pre.get("data", {}).get("id", ""))
+        manifesto = f"id:{data_id};request-id:{x_request_id};ts:{ts_value};"
+
+        # Calcula HMAC-SHA256
+        assinatura_calculada = hmac.new(
+            WEBHOOK_SECRET_TOKEN.encode("utf-8"),
+            manifesto.encode("utf-8"),
+            hashlib.sha256,
+        ).hexdigest()
+
+        if not hmac.compare_digest(assinatura_calculada, v1_value):
+            print(f"[WEBHOOK] ❌ Assinatura inválida! Calculada: {assinatura_calculada} | Recebida: {v1_value}")
+            raise HTTPException(status_code=401, detail="Assinatura do webhook inválida.")
+
+        print(f"[WEBHOOK] ✅ Assinatura válida.")
+        body = data_obj_pre
+    else:
+        body = await request.json()
+
     print(f"\n{'='*55}")
     print(f"[WEBHOOK] Payload recebido: {json.dumps(body, ensure_ascii=False)}")
     print(f"{'='*55}")
