@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  backend:
+    # Imagem publicada automaticamente pelo GitHub Actions no Docker Hub
+    image: costxs/petrogame-backend:latest
+    container_name: petrogame-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MERCADO_PAGO_ACCESS_TOKEN=APP_USR-715683952711754-050622-1406a7ae0adcf74f91e03fcb893c2c04-1958273471
+      - WEBHOOK_SECRET_TOKEN=03b4768ef10ef2ac6e570f85aa8bbe88054ad9b28bac68b2dba622476656680a
+      - GOOGLE_SHEET_NAME=Inscricoes_PetroGame
+      - GOOGLE_CREDENTIALS_JSON=
+      - EMAIL_REMETENTE=ufpaspe@gmail.com
+      - EMAIL_SENHA=acxrfxnzjhznojvv
+      - SMTP_SERVER=smtp.gmail.com
+      - SMTP_PORT=587
+      - FORMS_EQUIPE_URL=https://forms.gle/AfWHiYvEw8FhacdH9
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
